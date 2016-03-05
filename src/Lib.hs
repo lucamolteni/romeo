@@ -10,6 +10,12 @@ move :: (Player -> Player) -> Player -> [Player]
 move moveFunc player = [player, newPos]
     where newPos = moveFunc player
 
+moveDir :: Direction -> Player -> [Player]
+moveDir N =  move up
+moveDir E =  move right
+moveDir S =  move down
+moveDir W =  move left
+
 boardSize :: Int
 boardSize = 10
 

@@ -7,10 +7,12 @@ import Control.Monad
 main :: IO ()
 main = do putStrLn "Insert Player Name:"
           playerName <- getLine
-          forever $ echo playerName
+          let newPlayer = Player playerName 0 0
+          forever $ echo newPlayer
 
 
-echo playerName = do putStrLn $ playerName ++ ", insert a direction:"
+echo :: Player -> IO ()
+echo playerName = do putStrLn $ name playerName ++ ", insert a direction:"
                      input <- getLine
                      let direction = parseDirection input
                      print direction
