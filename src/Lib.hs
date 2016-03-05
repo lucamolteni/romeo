@@ -33,9 +33,12 @@ player2 = Player "player2" 4 4
 data Direction = N | S | E | W deriving Show
 
 data Player = Player { name :: String
-  , x                      :: Int
+  , x                       :: Int
   , y                       :: Int
-} deriving Show
+}
+
+instance Show Player where
+  show (Player name x y) = name ++ " x:" ++ show x ++ " y:" ++ show y
 
 overflow :: Int -> Bool
 overflow newPos = newPos > boardSize || newPos <= 0
