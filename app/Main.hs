@@ -15,7 +15,7 @@ loop initialState player = do putStrLn $ name player ++ ", insert a direction:"
                               input <- getLine
                               let direction = parseDirection input
                               let newPos = initialState ++ moveToNewPos player direction
-                              print newPos
+                              mapM_ print newPos
                               let newPlayer = lastWithDefault newPos player
                               loop newPos newPlayer
 
