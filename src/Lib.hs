@@ -4,16 +4,17 @@ move :: (Player -> Player) -> Player -> [Player]
 move moveFunc player = [player, newPos]
     where newPos = moveFunc player
 
-moveDir :: Direction -> Player -> [Player]
-moveDir N =  move up
-moveDir E =  move right
-moveDir S =  move down
-moveDir W =  move left
+moveDirF :: Direction -> Player -> [Player]
+moveDirF N =  move up
+moveDirF E =  move right
+moveDirF S =  move down
+moveDirF W =  move left
 
-moveDirF = flip moveDir
+moveDir :: Player -> Direction -> [Player]
+moveDir = flip moveDirF
 
 moveToNewPos :: Player -> [Direction] -> [Player]
-moveToNewPos player dir = dir >>= moveDirF player
+moveToNewPos player dir = dir >>= moveDir player
 
 parseDirection :: String -> [Direction]
 parseDirection "N" = [N]
