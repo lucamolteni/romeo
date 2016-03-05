@@ -15,13 +15,19 @@ echo :: Player -> IO ()
 echo playerName = do putStrLn $ name playerName ++ ", insert a direction:"
                      input <- getLine
                      let direction = parseDirection input
-                     print direction
+                     let newPos = moveToNewPos playerName direction
+                     print newPos
                      return ()
 
 
-parseDirection :: String -> Maybe Direction
-parseDirection "N" = Just N
-parseDirection "S" = Just S
-parseDirection "E" = Just E
-parseDirection "W" = Just W
-parseDirection _ = Nothing
+moveDirF = flip moveDir
+
+moveToNewPos :: Player -> [Direction] -> [Player]
+moveToNewPos player dir = dir >>= moveDirF player
+
+parseDirection :: String -> [Direction]
+parseDirection "N" = [N]
+parseDirection "S" = [S]
+parseDirection "E" = [E]
+parseDirection "W" = [W]
+parseDirection _ = []

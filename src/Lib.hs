@@ -16,6 +16,7 @@ moveDir E =  move right
 moveDir S =  move down
 moveDir W =  move left
 
+
 boardSize :: Int
 boardSize = 10
 
