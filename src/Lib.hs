@@ -1,7 +1,10 @@
 module Lib where
 
 someFunc :: IO ()
-someFunc = print $ move player1
+someFunc = do let p1 = (right . right . down) player1
+              let p2 = (down . down ) player2
+              print p1
+              print p2
 
 move :: Player -> Player
 move = right . right
@@ -9,8 +12,9 @@ move = right . right
 boardSize :: Int
 boardSize = 10
 
-player1 :: Player
 player1 = Player "player1" 0 0
+player2 = Player "player2" 4 4
+
 
 data Player = Player { name :: String
   ,  x :: Int
