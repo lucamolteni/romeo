@@ -8,13 +8,17 @@ main :: IO ()
 main = do putStrLn "Insert Player Name:"
           playerName <- getLine
           let newPlayer = Player playerName 0 0
-          forever $ echo newPlayer
+          loop [] newPlayer
+
+loop :: [Player] -> Player -> IO ()
+loop initialState player = do putStrLn $ name player ++ ", insert a direction:"
+                              input <- getLine
+                              let direction = parseDirection input
+                              let newPos = initialState ++ moveToNewPos player direction
+                              print newPos
+                              let newPlayer = lastWithDefault newPos player
+                              loop newPos newPlayer
 
 
-echo :: Player -> IO ()
-echo player = do putStrLn $ name player ++ ", insert a direction:"
-                 input <- getLine
-                 let direction = parseDirection input
-                 let newPos = moveToNewPos player direction
-                 print newPos
-                 return ()
+lastWithDefault :: [a] -> a -> a
+lastWithDefault list def = if null list then def else last list
