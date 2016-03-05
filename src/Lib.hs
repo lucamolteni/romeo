@@ -21,14 +21,29 @@ data Player = Player { name :: String
   , y :: Int
 } deriving Show
 
+overflow :: Int -> Bool
+overflow newPos = newPos > boardSize || newPos <= 0
+
 right :: Player -> Player
-right (Player name x y) = Player name (x + 1) y
+right (Player name x y) = let newXPos = x + 1 in
+                          if overflow newXPos
+                            then Player name x y
+                            else Player name newXPos y
 
 left :: Player -> Player
-left (Player name x y) = Player name (x - 1) y
+left (Player name x y) = let newXPos = x - 1 in
+                          if overflow newXPos
+                            then Player name x y
+                            else Player name newXPos y
 
 up :: Player -> Player
-up (Player name x y) = Player name x (y + 1)
+up (Player name x y) = let newYPos = y + 1 in
+                          if overflow newYPos
+                            then Player name x y
+                            else Player name x newYPos
 
 down :: Player -> Player
-down (Player name x y) = Player name x (y - 1)
+down (Player name x y) = let newYPos = y - 1 in
+                          if overflow newYPos
+                            then Player name x y
+                            else Player name x newYPos
