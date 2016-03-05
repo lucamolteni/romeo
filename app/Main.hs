@@ -12,9 +12,9 @@ main = do putStrLn "Insert Player Name:"
 
 
 echo :: Player -> IO ()
-echo playerName = do putStrLn $ name playerName ++ ", insert a direction:"
-                     input <- getLine
-                     let direction = parseDirection input
-                     let newPos = moveToNewPos playerName direction
-                     print newPos
-                     return ()
+echo player = do putStrLn $ name player ++ ", insert a direction:"
+                 input <- getLine
+                 let direction = parseDirection input
+                 let newPos = moveToNewPos player direction
+                 print newPos
+                 return ()
