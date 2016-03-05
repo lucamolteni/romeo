@@ -1,11 +1,5 @@
 module Lib where
 
-someFunc :: IO ()
-someFunc = do let p1 = (right . right . down) player1
-              let p2 = (down . down ) player2
-              print p1
-              print p2
-
 move :: (Player -> Player) -> Player -> [Player]
 move moveFunc player = [player, newPos]
     where newPos = moveFunc player
@@ -15,6 +9,18 @@ moveDir N =  move up
 moveDir E =  move right
 moveDir S =  move down
 moveDir W =  move left
+
+moveDirF = flip moveDir
+
+moveToNewPos :: Player -> [Direction] -> [Player]
+moveToNewPos player dir = dir >>= moveDirF player
+
+parseDirection :: String -> [Direction]
+parseDirection "N" = [N]
+parseDirection "S" = [S]
+parseDirection "E" = [E]
+parseDirection "W" = [W]
+parseDirection _ = []
 
 
 boardSize :: Int

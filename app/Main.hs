@@ -18,16 +18,3 @@ echo playerName = do putStrLn $ name playerName ++ ", insert a direction:"
                      let newPos = moveToNewPos playerName direction
                      print newPos
                      return ()
-
-
-moveDirF = flip moveDir
-
-moveToNewPos :: Player -> [Direction] -> [Player]
-moveToNewPos player dir = dir >>= moveDirF player
-
-parseDirection :: String -> [Direction]
-parseDirection "N" = [N]
-parseDirection "S" = [S]
-parseDirection "E" = [E]
-parseDirection "W" = [W]
-parseDirection _ = []
