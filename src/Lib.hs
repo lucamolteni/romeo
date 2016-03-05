@@ -16,6 +16,8 @@ boardSize = 10
 player1 = Player "player1" 0 0
 player2 = Player "player2" 4 4
 
+data Direction = N | S | E | W deriving Show
+
 data Player = Player { name :: String
   ,  x :: Int
   , y :: Int
