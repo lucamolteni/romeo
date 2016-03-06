@@ -32,9 +32,10 @@ player2 = Player "player2" 4 4
 
 data Direction = N | S | E | W deriving Show
 
-data Player = Player { name :: String
-  , x                       :: Int
-  , y                       :: Int
+data Player = Player {
+    name :: String
+  , x    :: Int
+  , y    :: Int
 }
 
 instance Show Player where
