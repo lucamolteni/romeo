@@ -12,12 +12,15 @@ main = do putStrLn "Insert Player Name:"
           loop [] player1
 
 loop :: [Player] -> Player -> IO ()
-loop initialState player1 = do  putStrLn $ name player1 ++ ", insert a direction:"
-                                input <- getLine
-                                let newPlayer1 = movePlayer player1 input
+loop initialState player1 = do  newPlayer1 <- movePlayerLoop player1
                                 let log = initialState ++ [newPlayer1]
                                 mapM_ print log
                                 loop log newPlayer1
+
+movePlayerLoop :: Player -> IO Player
+movePlayerLoop player = do putStrLn $ name player ++ ", insert a direction:"
+                           input <- getLine
+                           return $ movePlayer player input
 
 movePlayer :: Player -> String -> Player
 movePlayer p input = fromMaybe p newPlayer1
