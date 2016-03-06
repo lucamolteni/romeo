@@ -1,28 +1,20 @@
 module Lib where
 
-move :: (Player -> Player) -> Player -> [Player]
-move moveFunc player = [player, newPos]
-    where newPos = moveFunc player
+moveDirF :: Direction -> Player -> Player
+moveDirF N = up
+moveDirF E = right
+moveDirF S = down
+moveDirF W = left
 
-moveDirF :: Direction -> Player -> [Player]
-moveDirF N =  move up
-moveDirF E =  move right
-moveDirF S =  move down
-moveDirF W =  move left
+move :: Player -> Direction -> Player
+move = flip moveDirF
 
-moveDir :: Player -> Direction -> [Player]
-moveDir = flip moveDirF
-
-moveToNewPos :: Player -> [Direction] -> [Player]
-moveToNewPos player dir = dir >>= moveDir player
-
-parseDirection :: String -> [Direction]
-parseDirection "N" = [N]
-parseDirection "S" = [S]
-parseDirection "E" = [E]
-parseDirection "W" = [W]
-parseDirection _ = []
-
+parseDirection :: String -> Maybe Direction
+parseDirection "N" = Just N
+parseDirection "S" = Just S
+parseDirection "E" = Just E
+parseDirection "W" = Just W
+parseDirection _ = Nothing
 
 boardSize :: Int
 boardSize = 10
