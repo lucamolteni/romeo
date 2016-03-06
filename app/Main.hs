@@ -14,11 +14,15 @@ main = do putStrLn "Insert Player Name:"
 loop :: [Player] -> Player -> IO ()
 loop initialState player1 = do  putStrLn $ name player1 ++ ", insert a direction:"
                                 input <- getLine
-                                let maybeNewPlayer1 = fmap (move player1) (parseDirection input)
-                                let newPlayer1 = fromMaybe player1 maybeNewPlayer1
+                                let newPlayer1 = movePlayer player1 input
                                 let log = initialState ++ [newPlayer1]
                                 mapM_ print log
                                 loop log newPlayer1
+
+movePlayer :: Player -> String -> Player
+movePlayer p input = fromMaybe p newPlayer1
+    where newPlayer1 = fmap (move p) (parseDirection input)
+
 
 lastWithDefault :: [a] -> a -> a
 lastWithDefault list def = if null list then def else last list
