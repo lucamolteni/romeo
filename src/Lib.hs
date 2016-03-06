@@ -19,9 +19,6 @@ parseDirection _ = Nothing
 boardSize :: Int
 boardSize = 10
 
-player1 = Player "player1" 0 0
-player2 = Player "player2" 4 4
-
 data Direction = N | S | E | W deriving Show
 
 data Player = Player {
@@ -34,7 +31,7 @@ instance Show Player where
   show (Player name x y) = name ++ " x:" ++ show x ++ " y:" ++ show y
 
 overflow :: Int -> Bool
-overflow newPos = newPos > boardSize || newPos <= 0
+overflow newPos = newPos > boardSize || newPos < 0
 
 right :: Player -> Player
 right (Player name x y) = let newXPos = x + 1 in
