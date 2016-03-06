@@ -6,10 +6,13 @@ import           Lib
 
 
 main :: IO ()
-main = do putStrLn "Insert Player Name:"
-          playerName <- getLine
-          let player1 = Player playerName 0 0
+main = do player1 <- askForPlayerName
           loop [] player1
+
+askForPlayerName :: IO Player
+askForPlayerName = do putStrLn "Insert Player Name:"
+                      playerName <- getLine
+                      return $ Player playerName 0 0
 
 loop :: [Player] -> Player -> IO ()
 loop initialState player1 = do  newPlayer1 <- movePlayerLoop player1
